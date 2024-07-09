@@ -1,3 +1,12 @@
+"""
+1 - Fazer um algoritmo de estratégia gênetica(Trabalha com um único indivíduo e mutação)
+2 - Fazer um algoritmo de de programação evolutiava(Usa uma população e mutação)
+3 - Algoritmos Genéticos[População](Possuí uma população, trabalha com mutação e 
+recombinação)
+
+
+"""
+
 import População
 import Individuo
 import copy
