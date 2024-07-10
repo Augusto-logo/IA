@@ -4,52 +4,39 @@
 3 - Algoritmos Genéticos[População](Possuí uma população, trabalha com mutação e 
 recombinação)
 
-
 """
 
-import População
-import Individuo
-import copy
+# import População
+# from programaçãoEvolutiva import individuo
+# import copy
 
-print("=-" * 30)
-print("Algoritmo evolutivo")
-print("=-" * 30)
-#TamanhoPopulacao = input(int("Digite o tamanho da população: "))
-#TamanhoGene = input(int("Digite o tamanho do gene: "))
-TamanhoGene = int(8)
-tamanhoPopulação = int(10)
+metodo = 1
+# HUD para escolher o algoritmo
+# while True:
+#     print("=-" * 20)
+#     print("1 - Estratégia Evolutiva")
+#     print("2 - Programação Evolutiva")
+#     print("3 - Algoritmo Genético")
+#     print("=-" * 20)
+#     metodo = int(input("Escolha o algoritmo: "))
+#     if metodo < 1 or metodo > 3:
+#         print("Digite um valor válido")
+#     else:
+#         break
 
-populacao1 = População.Populacao(tamanhoPopulação, TamanhoGene)
-
-for i in range (0, tamanhoPopulação):
-    individuo1 = Individuo.Individuo()
-    populacao1.addIndividuo(individuo1)
-    individuo1 = None
-
-populacao1.mostrarPopulação()
-# melhorIndividuo = copy.deepcopy(individuo1)
-
-
-# individuo1.mostrarDados()
-# print("=-" * 30)
-
-# for i in range(0, 1000):
-#     geneAtual.mutacao()
-#     if geneAtual.FuncaoDeX < melhorGene.FuncaoDeX:
-#         melhorGene = copy.deepcopy(geneAtual)
-# melhorGene.mostrarDados()
-# print("=-" * 30)
-
-"""
-1 - Criar o algoritmo genético
-    1.1 - Criar a classe individuo !!
-    1.2 - Criar a função de definiri variaveis !!
-    1.3 - Criar a função de mutação !!
-    1.4 - Achar o melhor gene pela F(X) !!
-2 - Melhorar algoritmo genético
-    2.1 - Trocar a F(X) 
-    2.2 - 
-    2.3 -
-    2.4 -
-
-"""
+if metodo == 1:
+    import Individuo
+    tamanhoGen = int
+    A = int
+    B = int
+    C = int
+    print("=-" * 20)
+    tamanhoGen = int(input("Tamanho Genótipo:"))
+    print("Digite o ABC de uma Função do 2º: ex(x2+2x+1)")
+    A = str(input("A: "))
+    B = str(input("B: "))
+    C = str(input("C: "))
+    print(f"Sua função é {A} X² {B} X {C} ")
+    funcao = {A,B,C}
+    gen1 = Individuo(tamanhoGen,funcao)
+    print("=-" * 20)
