@@ -3,47 +3,64 @@ from bitstring import BitArray
 
 
 class Individuo:
-    def __init__(self, tamanhoGen, funcao):
-        self.gene = {}
-        self.tamanhoGen = tamanhoGen
-        self.decimal = 0
-        self.normalizado = 0
-        self.FuncaoDeX = 0
-        self.define_variaveis()
+    def __init__(self,  tamanhoGeno, funcao, minimo, maximo):
+        self.genotipo = []  # Lista vazia, pronta para ser preenchida
+        self.posicaoMelhorGenotipo = 0  # Posição do melhor genotipo
+        self.tamanhoGeno = tamanhoGeno  # AutoExplicativo
+        self.funcao = funcao if isinstance(funcao, list) else list(funcao)  # Garante que funcao seja uma lista
+        self.min = minimo
+        self.max = maximo
+        self.decimal = 0  # O valor binário do genotipo convertido para decimal
+        self.normalizado = 0  # Valor decimal normalizado para usar na função, utilizando MIN e MAX
+        self.FuncaoDeX = 0  # Achar a função de X(y) em função do valor em NORMALIZADO
+        
+    def define_genotipo(self, genotipo=None): # Função que cria um genotipo
+        if genotipo is None:
+            self.genotipo = list()
+        else:
+            self.genotipo = genotipo
+        for i in range(self.tamanhoGeno):
+            self.genotipo.append(randint(0,1))
+
+    def define_decimal(self, genotipo):
+        genotipoString = ''.join(str(bit) for bit in genotipo)
+        self.decimal = int(genotipoString, 2)
+
+    def define_normalizado(self, decimal, min, max, tamanhoGeno):
+        self.normalizado = min + (max - min) * (decimal/((2 ** tamanhoGeno)-1))
+    
+    def define_funcaoDeX(self, normalizado, funcao):
+        A = funcao[0]
+        B = funcao[1]
+        C = funcao[2]
+        self.FuncaoDeX = (A  * (normalizado ** 2)) + (B * normalizado) + C
+    
+    def mutacao(self):
+        novoGenotipo = self.genotipo
+        indexRandom = randint(0, self.tamanhoGeno - 1)
+        if novoGenotipo[indexRandom] == "1":
+            novoGenotipo[indexRandom] = 0
+        else:
+            novoGenotipo[indexRandom] = 1
+        self.genotipo.clear()
+        self.genotipo = novoGenotipo.copy()
+        Y = self.define_variaveis()
+        return Y
 
     def define_variaveis(self):
-        if self.gene is None:
-            self.gene = []
-        for i in range(self.tamanhoGen):
-            self.gene.append(str(randint(0, 1)))
-        gene_string = ''.join(self.gene)
-        self.decimal = BitArray(bin=gene_string).uint
-        self.normalizado = (self.decimal/((2 ** self.tamanhoGen) - 1)) * 6
-        self.FuncaoDeX = self.normalizado**2 - 5 * self.normalizado + 6
+        self.define_genotipo(self.genotipo)
+        self.define_decimal(self.genotipo)
+        self.define_normalizado(self.decimal, self.min, self.max, self.tamanhoGeno)
+        self.define_funcaoDeX(self.normalizado, self.funcao)
+        return self.FuncaoDeX
 
-    # def define_variaveis(self):
-    #     if not self.gene:
-    #         for i in range(self.tamanhoGen):
-    #             self.gene.append(str(randint(0, 1)))
-    #     gene_string = ''.join(self.gene)
-    #     self.decimal = BitArray(bin=gene_string).uint
-    #     self.normalizado = (self.decimal/((2 ** self.tamanhoGen) - 1)) * 6
-    #     self.FuncaoDeX = self.normalizado**2 - 5 * self.normalizado + 6
-
-    def mutacao(self):
-        novoGene = list(self.gene)
-        valorMudar = randint(0, self.tamanhoGen - 1)
-        if novoGene[valorMudar] == "1":
-            novoGene[valorMudar] = '0'
-        else:
-            novoGene[valorMudar] = '1'
-        self.gene = "".join(novoGene)
-        self.define_variaveis()
-
-    def mostrarDados(self):
-        print("Gene: ", self.gene)
-        print("tamanhoGen: ", self.tamanhoGen)
+    def mostrarDados(self, contadorMutacoes = None):
+        print("-="*20)
+        print("Nº Mutação: ", contadorMutacoes)
+        print("Genótipo: ", self.genotipo)
+        print("tamanhoGeno: ", self.tamanhoGeno)
+        print("Função:", self.funcao)
         print("Decimal: ", self.decimal)
-        print("Normalizado: ", self.normalizado)
-        print("Funcao de X: ", self.FuncaoDeX)
+        print(f"Normalizado: {self.normalizado:.2f}")
+        print(f"Funcao de X: {self.FuncaoDeX:.2f}")
 

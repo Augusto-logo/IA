@@ -8,7 +8,7 @@ recombinação)
 
 # import População
 # from programaçãoEvolutiva import individuo
-# import copy
+import copy
 
 metodo = 1
 # HUD para escolher o algoritmo
@@ -25,18 +25,33 @@ metodo = 1
 #         break
 
 if metodo == 1:
-    import Individuo
+    verify = 0
+    from Individuo import Individuo
     tamanhoGen = int
-    A = int
-    B = int
-    C = int
+    A,B,C = 1,-5,6
+    minimo,maximo = 0,6
     print("=-" * 20)
-    tamanhoGen = int(input("Tamanho Genótipo:"))
+    # tamanhoGen = int(input("Tamanho Genótipo:"))
+    tamanhoGen = 5
     print("Digite o ABC de uma Função do 2º: ex(x2+2x+1)")
-    A = str(input("A: "))
-    B = str(input("B: "))
-    C = str(input("C: "))
+    # A = str(input("A: "))
+    # B = str(input("B: "))
+    # C = str(input("C: "))
     print(f"Sua função é {A} X² {B} X {C} ")
+    print()
     funcao = {A,B,C}
-    gen1 = Individuo(tamanhoGen,funcao)
-    print("=-" * 20)
+    indivi = Individuo(tamanhoGen,funcao,minimo,maximo)
+    melhorIndivi = Individuo(tamanhoGen,funcao,minimo,maximo)
+    melhorIndivi = copy.deepcopy(indivi)
+    Y = indivi.define_variaveis()
+    indivi.mostrarDados()
+
+    print("-="*20)
+    contadorMutacao = 0
+    cont = int(input("Digite quantas mutações: "))
+    for i in range(cont):
+        novoY = indivi.mutacao()
+        indivi.mostrarDados(contadorMutacao)
+        contadorMutacao += 1
+    print("melhor resultado:")
+    melhorIndivi.mostrarDados()
