@@ -25,13 +25,14 @@ class Populacao:
     
     def mostrarMelhorIndividuo(self):
         print("-=" * 20)
-        print("Melhor Individuo da população:")
+        print("Melhor Individuo das populações:")
         print("Genotipo: ", self.melhorIndividuo.genotipo)
         print(f"FunçãoDeX:  {self.melhorIndividuo.FuncaoDeX:.2f}")
         print("-=" * 20)
 
-    def mutarPopulacao(self, contador):
-        for i in range(contador):
-            indexes = sample(range(0,self.tamanhoPopulação),contador)
-        for i in range(contador):
-            self.individuos[indexes[i]].mutacao
+    def mutarPopulacao(self):
+        for i in range(self.tamanhoPopulação):
+            novoY = self.individuos[i].mutacao()
+            if novoY < self.melhorIndividuo.FuncaoDeX:
+                self.melhorIndividuo = copy.deepcopy(self.individuos[i])
+

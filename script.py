@@ -69,7 +69,8 @@ if metodo == 1:
 elif metodo == 2:
     tamanhoGen, funcao, minimo,maximo = inicializaVariaveis()
     # Criação da população
-    tamanhoPop = int(input("Tamanho População: "))
+    # tamanhoPop = int(input("Tamanho População: "))
+    tamanhoPop = 10
     populacao1 = Populacao(tamanhoPop, tamanhoGen)
     # Preencher a população
     for i in range(tamanhoPop):
@@ -78,5 +79,13 @@ elif metodo == 2:
         populacao1.addIndividuo(indivi)
     populacao1.mostrarPopulação()
     populacao1.mostrarMelhorIndividuo()
-    cont = int(input("Quantas mutações: "))
-    populacao1.mutarPopulacao(cont)
+
+    # Faz mutação na população
+    
+    verify = int(input("Digite o número de vezes para mutar a população: "))
+    print("-="*20)
+    for i in range(verify):
+        populacao1.mutarPopulacao()
+    print("Ultima população:")
+    populacao1.mostrarPopulação()
+    populacao1.mostrarMelhorIndividuo()
