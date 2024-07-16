@@ -11,9 +11,8 @@ from Individuo import Individuo
 import copy
 
 # Função de inicialização das variáveis para a estrutura do individuo
-def inicializaVariaveis():
+def inicializaIndividuo():
     # Inicialização de algumas variáveis
-    tamanhoGen = int
     A,B,C = 1,-5,6
     minimo,maximo = 0,6
     # Prompt pedindo as informações para a equação de 2 grau e o tamanho do genotipo(lista de binarios) do modelo
@@ -27,9 +26,11 @@ def inicializaVariaveis():
     print(f"Sua função é {A} X² {B} X {C} ")
     print()
     funcao = {A,B,C}
-    return tamanhoGen, funcao, minimo,maximo
+    individuo = Individuo(tamanhoGen, funcao, minimo,maximo)
+    return individuo
 
-metodo = 2
+indivi = inicializaIndividuo()
+metodo = 1
 # HUD para escolher o algoritmo
 # while True:
 #     print("=-" * 20)
@@ -44,10 +45,7 @@ metodo = 2
 #         break
 
 if metodo == 1:
-    tamanhoGen, funcao, minimo,maximo = inicializaVariaveis()
-
     # Criação do individuo base
-    indivi = Individuo(tamanhoGen,funcao,minimo,maximo)
     Y = indivi.define_variaveis()
     melhorIndivi = copy.deepcopy(indivi)
     indivi.mostrarDados()
@@ -65,16 +63,14 @@ if metodo == 1:
             Y = novoY
     print("melhor resultado:")
     melhorIndivi.mostrarDados()
-
 elif metodo == 2:
-    tamanhoGen, funcao, minimo,maximo = inicializaVariaveis()
     # Criação da população
     # tamanhoPop = int(input("Tamanho População: "))
+    tamanhoGen = indivi.tamanhoGeno
     tamanhoPop = 10
     populacao1 = Populacao(tamanhoPop, tamanhoGen)
     # Preencher a população
     for i in range(tamanhoPop):
-        indivi = Individuo(tamanhoGen,funcao,minimo,maximo)
         indivi.define_variaveis()
         populacao1.addIndividuo(indivi)
     populacao1.mostrarPopulação()
