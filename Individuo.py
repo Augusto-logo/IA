@@ -1,6 +1,4 @@
 from random import randint
-from bitstring import BitArray
-
 
 class Individuo:
     def __init__(self,  tamanhoGeno, funcao, minimo, maximo):
