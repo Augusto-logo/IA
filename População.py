@@ -11,5 +11,6 @@ class Populacao:
 
     def mostrarPopulação(self):
         for i in range (0,self.tamanhoPopulação):
-            print("Individuo: ", self.individuos[i].gene)
+            print("Individuo: ", self.individuos[i].genotipo)
+            print("FunçãoDeX: ", self.individuos[i].FuncaoDeX)
 

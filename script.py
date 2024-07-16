@@ -5,12 +5,31 @@
 recombinação)
 
 """
-
-# import População
-# from programaçãoEvolutiva import individuo
+# Imports
+from População import Populacao
+from Individuo import Individuo
 import copy
 
-metodo = 1
+# Função de inicialização das variáveis para a estrutura do individuo
+def inicializaVariaveis():
+    # Inicialização de algumas variáveis
+    tamanhoGen = int
+    A,B,C = 1,-5,6
+    minimo,maximo = 0,6
+    # Prompt pedindo as informações para a equação de 2 grau e o tamanho do genotipo(lista de binarios) do modelo
+    print("=-" * 20)
+    # tamanhoGen = int(input("Tamanho Genótipo:"))
+    tamanhoGen = 5
+    print("Digite o ABC de uma Função do 2º: ex(x2+2x+1)")
+    # A = str(input("A: "))
+    # B = str(input("B: "))
+    # C = str(input("C: "))
+    print(f"Sua função é {A} X² {B} X {C} ")
+    print()
+    funcao = {A,B,C}
+    return tamanhoGen, funcao, minimo,maximo
+
+metodo = 2
 # HUD para escolher o algoritmo
 # while True:
 #     print("=-" * 20)
@@ -25,29 +44,14 @@ metodo = 1
 #         break
 
 if metodo == 1:
-    # Inicialização de algumas variáveis e importação da classe de modelo
-    verify = 0
-    from Individuo import Individuo
-    tamanhoGen = int
-    A,B,C = 1,-5,6
-    minimo,maximo = 0,6
-    # Prompt pedindo as informações para a equação de 2 grau e o tamanho do genotipo(lista de binarios) do modelo
-    print("=-" * 20)
-    # tamanhoGen = int(input("Tamanho Genótipo:"))
-    tamanhoGen = 5
-    print("Digite o ABC de uma Função do 2º: ex(x2+2x+1)")
-    # A = str(input("A: "))
-    # B = str(input("B: "))
-    # C = str(input("C: "))
-    print(f"Sua função é {A} X² {B} X {C} ")
-    print()
+    tamanhoGen, funcao, minimo,maximo = inicializaVariaveis()
+
     # Criação do individuo base
-    funcao = {A,B,C}
     indivi = Individuo(tamanhoGen,funcao,minimo,maximo)
-    melhorIndivi = Individuo(tamanhoGen,funcao,minimo,maximo)
-    melhorIndivi = copy.deepcopy(indivi)
     Y = indivi.define_variaveis()
+    melhorIndivi = copy.deepcopy(indivi)
     indivi.mostrarDados()
+
     # Loop fazendo mutações e verificando o melhor individuo.
     print("-="*20)
     contadorMutacao = 0
@@ -61,3 +65,16 @@ if metodo == 1:
             Y = novoY
     print("melhor resultado:")
     melhorIndivi.mostrarDados()
+
+elif metodo == 2:
+    tamanhoGen, funcao, minimo,maximo = inicializaVariaveis()
+    # Criação da população
+    tamanhoPop = int(input("Tamanho População: "))
+    populacao1 = Populacao(tamanhoPop, tamanhoGen)
+    # Preencher a população
+    for i in range(tamanhoPop):
+        indivi = Individuo(tamanhoGen,funcao,minimo,maximo)
+        indivi.define_variaveis()
+        populacao1.addIndividuo(indivi)
+        melhorIndivi = copy.deepcopy(indivi)
+        indivi.mostrarDados()
