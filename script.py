@@ -25,11 +25,13 @@ metodo = 1
 #         break
 
 if metodo == 1:
+    # Inicialização de algumas variáveis e importação da classe de modelo
     verify = 0
     from Individuo import Individuo
     tamanhoGen = int
     A,B,C = 1,-5,6
     minimo,maximo = 0,6
+    # Prompt pedindo as informações para a equação de 2 grau e o tamanho do genotipo(lista de binarios) do modelo
     print("=-" * 20)
     # tamanhoGen = int(input("Tamanho Genótipo:"))
     tamanhoGen = 5
@@ -39,13 +41,14 @@ if metodo == 1:
     # C = str(input("C: "))
     print(f"Sua função é {A} X² {B} X {C} ")
     print()
+    # Criação do individuo base
     funcao = {A,B,C}
     indivi = Individuo(tamanhoGen,funcao,minimo,maximo)
     melhorIndivi = Individuo(tamanhoGen,funcao,minimo,maximo)
     melhorIndivi = copy.deepcopy(indivi)
     Y = indivi.define_variaveis()
     indivi.mostrarDados()
-
+    # Loop fazendo mutações e verificando o melhor individuo.
     print("-="*20)
     contadorMutacao = 0
     cont = int(input("Digite quantas mutações: "))
@@ -53,5 +56,8 @@ if metodo == 1:
         novoY = indivi.mutacao()
         indivi.mostrarDados(contadorMutacao)
         contadorMutacao += 1
+        if novoY < Y:
+            melhorIndivi = copy.deepcopy(indivi)
+            Y = novoY
     print("melhor resultado:")
     melhorIndivi.mostrarDados()
