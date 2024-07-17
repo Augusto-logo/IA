@@ -29,7 +29,7 @@ def inicializaVariaveis():
     funcao = {A,B,C}
     return tamanhoGen, funcao, minimo,maximo
 
-metodo = 2
+metodo = 3
 # HUD para escolher o algoritmo
 # while True:
 #     print("=-" * 20)
@@ -88,4 +88,26 @@ elif metodo == 2:
         populacao1.mutarPopulacao()
     print("Ultima população:")
     populacao1.mostrarPopulação()
+    populacao1.mostrarMelhorIndividuo()
+elif metodo == 3:
+    tamanhoGen, funcao, minimo,maximo = inicializaVariaveis()
+    # Criação da população
+    # tamanhoPop = int(input("Tamanho População: "))
+    tamanhoPop = 10
+    populacao1 = Populacao(tamanhoPop, tamanhoGen)
+
+    # Preencher a população
+    for i in range(tamanhoPop):
+        indivi = Individuo(tamanhoGen,funcao,minimo,maximo)
+        indivi.define_variaveis()
+        populacao1.addIndividuo(indivi)
+    populacao1.mostrarPopulação()
+    populacao1.mostrarMelhorIndividuo()
+
+    verify = int(input("Digite o número de vezes para recombinar a população: "))
+    print("-="*20)
+    for i in range(verify):
+        populacao1.recombinaPopulacao()
+    print("Ultima população:")
+    populacao1.mostrarPopulaçãoCombinada()
     populacao1.mostrarMelhorIndividuo()

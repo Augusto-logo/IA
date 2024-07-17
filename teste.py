@@ -1,5 +1,2 @@
-gene = []
-gene.append(0)
-gene.append(1)
-
-print(gene)
+teste = int(11/2)
+print(teste)

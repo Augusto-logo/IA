@@ -1,12 +1,13 @@
 import Individuo
 import copy
-from random import sample
+from random import sample, randint, choice
 
 class Populacao:
     def __init__(self, tamanhoPopulação,tamanhoIndividuo):
         self.tamanhoPopulação = tamanhoPopulação
         self.tamanhoIndividuo = tamanhoIndividuo
         self.individuos = list()
+        self.individuosCombinados = list()
         self.melhorIndividuo = None
 
     def addIndividuo(self, individuo):
@@ -36,3 +37,40 @@ class Populacao:
             if novoY < self.melhorIndividuo.FuncaoDeX:
                 self.melhorIndividuo = copy.deepcopy(self.individuos[i])
 
+    def recombinaPopulacao(self):
+        bufferLista = list()
+        repetidor = int(self.tamanhoPopulação/2)
+
+        for i in range(self.tamanhoPopulação):
+            bufferLista.append(i)
+
+        for i in range(repetidor):
+            geno1 = choice(bufferLista)
+            bufferLista.remove(geno1)
+
+            geno2 = choice(bufferLista)
+            bufferLista.remove(geno2)
+
+            fatiamento = randint(0,self.tamanhoPopulação - 1)
+
+            novoIndividuo1 = self.individuos[geno1].genotipo[:fatiamento]
+            novoIndividuo1 += self.individuos[geno2].genotipo[fatiamento:]
+            
+            novoIndividuo2 = self.individuos[geno2].genotipo[:fatiamento]
+            novoIndividuo2 += self.individuos[geno1].genotipo[fatiamento:]
+            self.individuosCombinados.append(novoIndividuo1)
+            self.individuosCombinados.append(novoIndividuo2)
+
+        if not bufferLista:
+            return
+        else:
+            fatiamento = randint(0,self.tamanhoPopulação - 1)
+            novoIndividuo = self.individuos[bufferLista[0]].genotipo[:fatiamento]
+            novoIndividuo += self.individuos[bufferLista[0]].genotipo[fatiamento:]
+            self.individuosCombinados.append(novoIndividuo)
+
+    def mostrarPopulaçãoCombinada(self):
+        for i in range (0,self.tamanhoPopulação):
+            print("Individuo: ", i)
+            print(f"genotipo: {self.individuosCombinados[i].genotipo}")
+            print(f"FunçãoDeX:  {self.individuosCombinados[i].FuncaoDeX:.2f}")
