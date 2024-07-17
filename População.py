@@ -1,6 +1,6 @@
 import Individuo
 import copy
-from random import sample
+from random import randint,sample
 
 class Populacao:
     def __init__(self, tamanhoPopulação,tamanhoIndividuo):
@@ -35,4 +35,30 @@ class Populacao:
             novoY = self.individuos[i].mutacao()
             if novoY < self.melhorIndividuo.FuncaoDeX:
                 self.melhorIndividuo = copy.deepcopy(self.individuos[i])
+    
+    def recombinaPopulacao(self):
+        for i in range(self.tamanhoPopulação):
+            elemento1, elemento2 = sample(range(self.tamanhoPopulação,2))
+
+            fatiamento = randint(0,self.tamanhoPopulação - 1)
+
+            novoIndividuo1 = self.individuos[elemento1].genotipo[:fatiamento]
+            novoIndividuo2 = self.individuos[elemento2].genotipo[:fatiamento]
+
+            novoIndividuo1 += self.individuos[elemento2].genotipo[fatiamento:]
+            novoIndividuo2 += self.individuos[elemento1].genotipo[fatiamento:]
+
+            print(novoIndividuo1)
+            print(novoIndividuo2)
+
+
+            
+
+
+            
+
+            
+
+        
+
 

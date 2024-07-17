@@ -29,6 +29,13 @@ def inicializaIndividuo():
     individuo = Individuo(tamanhoGen, funcao, minimo,maximo)
     return individuo
 
+def inicializaPopulacao(tamanhoGeno):
+    # Criação da população
+    # tamanhoPop = int(input("Tamanho População: "))
+    tamanhoPop = 10
+    populacao1 = Populacao(tamanhoPop, tamanhoGeno)
+    return populacao1
+
 indivi = inicializaIndividuo()
 metodo = 1
 # HUD para escolher o algoritmo
@@ -63,25 +70,37 @@ if metodo == 1:
             Y = novoY
     print("melhor resultado:")
     melhorIndivi.mostrarDados()
+
 elif metodo == 2:
-    # Criação da população
-    # tamanhoPop = int(input("Tamanho População: "))
-    tamanhoGen = indivi.tamanhoGeno
-    tamanhoPop = 10
-    populacao1 = Populacao(tamanhoPop, tamanhoGen)
+    populacao1 = inicializaPopulacao(indivi.tamanhoGeno)
     # Preencher a população
-    for i in range(tamanhoPop):
+    for i in range(populacao1.tamanhoPopulação):
         indivi.define_variaveis()
         populacao1.addIndividuo(indivi)
     populacao1.mostrarPopulação()
     populacao1.mostrarMelhorIndividuo()
 
     # Faz mutação na população
-    
     verify = int(input("Digite o número de vezes para mutar a população: "))
     print("-="*20)
     for i in range(verify):
         populacao1.mutarPopulacao()
+    print("Ultima população:")
+    populacao1.mostrarPopulação()
+    populacao1.mostrarMelhorIndividuo()
+elif metodo == 3:
+    populacao1 = inicializaPopulacao(indivi.tamanhoGeno)
+    # Preencher a população
+    for i in range(populacao1.tamanhoPopulação):
+        indivi.define_variaveis()
+        populacao1.addIndividuo(indivi)
+    populacao1.mostrarPopulação()
+    populacao1.mostrarMelhorIndividuo()
+
+    verify = int(input("Digite o número de vezes para recombinar a população: "))
+    print("-="*20)
+    for i in range(verify):
+        populacao1.recombinaPopulacao()
     print("Ultima população:")
     populacao1.mostrarPopulação()
     populacao1.mostrarMelhorIndividuo()

@@ -52,7 +52,7 @@ class Individuo:
         self.define_funcaoDeX(self.normalizado, self.funcao)
         return self.FuncaoDeX
 
-    def mostrarDados(self, contadorMutacoes = 0):
+    def mostrarDados(self, contadorMutacoes = None):
         print("-="*20)
         print("Nº Mutação: ", contadorMutacoes)
         print("Genótipo: ", self.genotipo)
