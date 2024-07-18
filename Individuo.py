@@ -1,8 +1,8 @@
 from random import randint
 
 class Individuo:
-    def __init__(self,  tamanhoGeno, funcao, minimo, maximo):
-        self.genotipo = []  # Lista vazia, pronta para ser preenchida
+    def __init__(self, tamanhoGeno, funcao, minimo, maximo, genotipo = None):
+        self.genotipo = genotipo  # Lista vazia, pronta para ser preenchida
         self.posicaoMelhorGenotipo = 0  # Posição do melhor genotipo
         self.tamanhoGeno = tamanhoGeno  # AutoExplicativo
         self.funcao = funcao if isinstance(funcao, list) else list(funcao)  # Garante que funcao seja uma lista

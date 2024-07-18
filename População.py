@@ -17,6 +17,11 @@ class Populacao:
             return
         if individuo.FuncaoDeX < self.melhorIndividuo.FuncaoDeX:
             self.melhorIndividuo = copy.deepcopy(individuo)
+    
+    def addIndividuoCombinado(self, individuo):
+        self.individuosCombinados.append(individuo)
+        if individuo.FuncaoDeX < self.melhorIndividuo.FuncaoDeX:
+            self.melhorIndividuo = copy.deepcopy(individuo)
 
     def mostrarPopulação(self):
         for i in range (0,self.tamanhoPopulação):
@@ -39,6 +44,7 @@ class Populacao:
 
     def recombinaPopulacao(self):
         bufferLista = list()
+        bufferIndividuo = copy.deepcopy(self.individuos[0])
         repetidor = int(self.tamanhoPopulação/2)
 
         for i in range(self.tamanhoPopulação):
@@ -58,8 +64,12 @@ class Populacao:
             
             novoIndividuo2 = self.individuos[geno2].genotipo[:fatiamento]
             novoIndividuo2 += self.individuos[geno1].genotipo[fatiamento:]
-            self.individuosCombinados.append(novoIndividuo1)
-            self.individuosCombinados.append(novoIndividuo2)
+
+            bufferIndividuo.genotipo = novoIndividuo1
+            self.addIndividuoCombinado(bufferIndividuo)
+
+            bufferIndividuo.genotipo = novoIndividuo2
+            self.addIndividuoCombinado(bufferIndividuo)
 
         if not bufferLista:
             return

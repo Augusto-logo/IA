@@ -107,6 +107,7 @@ elif metodo == 3:
     verify = int(input("Digite o número de vezes para recombinar a população: "))
     print("-="*20)
     for i in range(verify):
+        populacao1.individuosCombinados.clear()
         populacao1.recombinaPopulacao()
     print("Ultima população:")
     populacao1.mostrarPopulaçãoCombinada()
