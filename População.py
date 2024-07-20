@@ -1,12 +1,13 @@
 import Individuo
 import copy
-from random import randint,sample
+from random import randint,choice
 
 class Populacao:
     def __init__(self, tamanhoPopulação,tamanhoIndividuo):
         self.tamanhoPopulação = tamanhoPopulação
         self.tamanhoIndividuo = tamanhoIndividuo
         self.individuos = list()
+        self.individuosCombinados = list()
         self.melhorIndividuo = None
 
     def addIndividuo(self, individuo):
@@ -16,15 +17,12 @@ class Populacao:
             return
         if individuo.FuncaoDeX < self.melhorIndividuo.FuncaoDeX:
             self.melhorIndividuo = copy.deepcopy(individuo)
-<<<<<<< Updated upstream
-=======
     
     def addIndividuoCombinado(self, individuo):
         novoY = individuo.mutacao()
         self.individuosCombinados.append(individuo)
         if novoY < self.melhorIndividuo.FuncaoDeX:
             self.melhorIndividuo = copy.deepcopy(individuo)
->>>>>>> Stashed changes
 
     def mostrarPopulação(self):
         for i in range (0,self.tamanhoPopulação):
@@ -46,47 +44,29 @@ class Populacao:
                 self.melhorIndividuo = copy.deepcopy(self.individuos[i])
     
     def recombinaPopulacao(self):
-<<<<<<< Updated upstream
-=======
         bufferLista = list()
         repetidor = int(self.tamanhoPopulação/2)
 
->>>>>>> Stashed changes
         for i in range(self.tamanhoPopulação):
-            elemento1, elemento2 = sample(range(self.tamanhoPopulação,2))
-
-            fatiamento = randint(1, self.tamanhoPopulação - 1)
-
-<<<<<<< Updated upstream
-            novoIndividuo1 = self.individuos[elemento1].genotipo[:fatiamento]
-            novoIndividuo2 = self.individuos[elemento2].genotipo[:fatiamento]
-
-            novoIndividuo1 += self.individuos[elemento2].genotipo[fatiamento:]
-            novoIndividuo2 += self.individuos[elemento1].genotipo[fatiamento:]
-
-            print(novoIndividuo1)
-            print(novoIndividuo2)
-
-
-            
-
-
-            
-
-            
-
+            bufferLista.append(i)
         
-
-
-=======
+        for i in range(repetidor):
+            geno1 = choice(bufferLista)
+            bufferLista.remove(geno1)
+        
+            geno2 = choice(bufferLista)
+            bufferLista.remove(geno2)
+        
+            fatiamento = randint(1, self.tamanhoPopulação - 1)
+        
             novoIndividuo1 = self.individuos[geno1].genotipo[:fatiamento] + self.individuos[geno2].genotipo[fatiamento:]
             novoIndividuo2 = self.individuos[geno2].genotipo[:fatiamento] + self.individuos[geno1].genotipo[fatiamento:]
-
+        
             # Cria uma nova instância de bufferIndividuo para o primeiro indivíduo combinado
             bufferIndividuo1 = copy.deepcopy(self.individuos[0])
             bufferIndividuo1.genotipo = copy.deepcopy(novoIndividuo1)
             self.addIndividuoCombinado(bufferIndividuo1)
-
+        
             # Cria uma nova instância de bufferIndividuo para o segundo indivíduo combinado
             bufferIndividuo2 = copy.deepcopy(self.individuos[0])
             bufferIndividuo2.genotipo = copy.deepcopy(novoIndividuo2)
@@ -107,4 +87,3 @@ class Populacao:
             print("Individuo: ", i)
             print(f"genotipo: {self.individuosCombinados[i].genotipo}")
             print(f"FunçãoDeX:  {self.individuosCombinados[i].FuncaoDeX:.2f}")
->>>>>>> Stashed changes
