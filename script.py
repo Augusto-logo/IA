@@ -1,9 +1,9 @@
 """
+Problema:
 1 - Fazer um algoritmo de estratégia gênetica(Trabalha com um único indivíduo e mutação)
 2 - Fazer um algoritmo de de programação evolutiava(Usa uma população e mutação)
 3 - Algoritmos Genéticos[População](Possuí uma população, trabalha com mutação e 
 recombinação)
-
 """
 # Imports
 from População import Populacao
@@ -11,24 +11,36 @@ from Individuo import Individuo
 import copy
 
 # Função de inicialização das variáveis para a estrutura do individuo
+<<<<<<< Updated upstream
 def inicializaIndividuo():
     # Inicialização de algumas variáveis
     A,B,C = 1,-5,6
     minimo,maximo = 0,6
+=======
+def inicializaVariaveis():
+
+    # Inicialização de algumas variáveis
+    # tamanhoGen = 5
+    # A,B,C = 1,-5,6
+    # minimo,maximo = 0,6
+
+>>>>>>> Stashed changes
     # Prompt pedindo as informações para a equação de 2 grau e o tamanho do genotipo(lista de binarios) do modelo
     print("=-" * 20)
-    # tamanhoGen = int(input("Tamanho Genótipo:"))
-    tamanhoGen = 5
-    print("Digite o ABC de uma Função do 2º: ex(x2+2x+1)")
-    # A = str(input("A: "))
-    # B = str(input("B: "))
-    # C = str(input("C: "))
-    print(f"Sua função é {A} X² {B} X {C} ")
+    tamanhoGen = int(input("Tamanho Genótipo:"))
+    print("Digite o ABC de uma Função do 2º: ex(X²+2X+1)")
+    A = int(input("A: "))
+    B = int(input("B: "))
+    C = int(input("C: "))
+    print(f"Sua função é {A}X² + ({B}X) + ({C})")
+    minimo = int(input("Minimo: "))
+    maximo = int(input("Maximo: "))
     print()
     funcao = {A,B,C}
     individuo = Individuo(tamanhoGen, funcao, minimo,maximo)
     return individuo
 
+<<<<<<< Updated upstream
 def inicializaPopulacao(tamanhoGeno):
     # Criação da população
     # tamanhoPop = int(input("Tamanho População: "))
@@ -38,18 +50,21 @@ def inicializaPopulacao(tamanhoGeno):
 
 indivi = inicializaIndividuo()
 metodo = 1
+=======
+metodo = 0
+>>>>>>> Stashed changes
 # HUD para escolher o algoritmo
-# while True:
-#     print("=-" * 20)
-#     print("1 - Estratégia Evolutiva")
-#     print("2 - Programação Evolutiva")
-#     print("3 - Algoritmo Genético")
-#     print("=-" * 20)
-#     metodo = int(input("Escolha o algoritmo: "))
-#     if metodo < 1 or metodo > 3:
-#         print("Digite um valor válido")
-#     else:
-#         break
+while True:
+    print("=-" * 20)
+    print("1 - Estratégia Evolutiva")
+    print("2 - Programação Evolutiva")
+    print("3 - Algoritmo Genético")
+    print("=-" * 20)
+    metodo = int(input("Escolha o algoritmo: "))
+    if metodo < 1 or metodo > 3:
+        print("Digite um valor válido")
+    else:
+        break
 
 if metodo == 1:
     # Criação do individuo base
@@ -72,7 +87,16 @@ if metodo == 1:
     melhorIndivi.mostrarDados()
 
 elif metodo == 2:
+<<<<<<< Updated upstream
     populacao1 = inicializaPopulacao(indivi.tamanhoGeno)
+=======
+    tamanhoGen, funcao, minimo,maximo = inicializaVariaveis()
+
+    # Criação da população
+    # tamanhoPop = 10
+    tamanhoPop = int(input("Tamanho População: "))
+    populacao1 = Populacao(tamanhoPop, tamanhoGen)
+>>>>>>> Stashed changes
     # Preencher a população
     for i in range(populacao1.tamanhoPopulação):
         indivi.define_variaveis()
@@ -88,6 +112,7 @@ elif metodo == 2:
     print("Ultima população:")
     populacao1.mostrarPopulação()
     populacao1.mostrarMelhorIndividuo()
+    
 elif metodo == 3:
     populacao1 = inicializaPopulacao(indivi.tamanhoGeno)
     # Preencher a população
@@ -102,5 +127,10 @@ elif metodo == 3:
     for i in range(verify):
         populacao1.recombinaPopulacao()
     print("Ultima população:")
+<<<<<<< Updated upstream
     populacao1.mostrarPopulação()
     populacao1.mostrarMelhorIndividuo()
+=======
+    populacao1.mostrarPopulaçãoCombinada()
+    populacao1.mostrarMelhorIndividuo()
+>>>>>>> Stashed changes

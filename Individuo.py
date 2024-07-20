@@ -62,3 +62,29 @@ class Individuo:
         print(f"Normalizado: {self.normalizado:.2f}")
         print(f"Funcao de X: {self.FuncaoDeX:.2f}")
 
+class Populacao:
+    def __init__(self, tamanho, tamanhoGen):
+        """
+        Inicializa a população com um tamanho específico e tamanho de genoma para os indivíduos.
+        """
+    
+    def addIndividuo(self, individuo):
+        """
+        Adiciona um novo indivíduo à população.
+        """
+    
+    def mostrarPopulação(self):
+        """
+        Imprime todos os indivíduos da população.
+        """
+    
+    def mostrarMelhorIndividuo(self):
+        """
+        Identifica e mostra o indivíduo com o melhor fitness na população.
+        """
+    
+    def mutarPopulacao(self):
+        """
+        Aplica mutação em indivíduos da população com uma certa probabilidade.
+        """
+
