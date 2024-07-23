@@ -19,7 +19,9 @@ class Populacao:
             self.melhorIndividuo = copy.deepcopy(individuo)
     
     def addIndividuoCombinado(self, individuo):
-        novoY = individuo.mutacao()
+        taxa = randint(0,100)
+        if taxa < 10:
+            novoY = individuo.mutacao()
         self.individuosCombinados.append(individuo)
         if novoY < self.melhorIndividuo.FuncaoDeX:
             self.melhorIndividuo = copy.deepcopy(individuo)
@@ -35,6 +37,7 @@ class Populacao:
         print("Melhor Individuo das populações:")
         print("Genotipo: ", self.melhorIndividuo.genotipo)
         print(f"FunçãoDeX:  {self.melhorIndividuo.FuncaoDeX:.2f}")
+        print(f"Valor de X: {self.melhorIndividuo.normalizado:.2f}")
         print("-=" * 20)
 
     def mutarPopulacao(self):

@@ -23,7 +23,11 @@ def inicializaVariaveis():
     minimo = int(input("Minimo: "))
     maximo = int(input("Maximo: "))
     print()
-    funcao = {A,B,C}
+    funcao = list()
+    funcao.append(A)
+    funcao.append(B)
+    funcao.append(C)
+    # funcao = {A,B,C}
     return tamanhoGen, funcao, minimo,maximo
 
 metodo = 0
